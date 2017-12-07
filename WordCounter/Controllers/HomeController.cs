@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WordCounter.Models;
 
 namespace WordCounter.Controllers
 {
@@ -30,30 +31,13 @@ namespace WordCounter.Controllers
 
         public ActionResult WordCount(string inputString)
         {
-                string[] textMass;
-                string text = inputString.Replace('\n', ' ');
-                textMass = text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                int res = textMass.Length;
-                if (textMass[textMass.Length - 1] == "")
-                {
-                    res = res - 1;
-                }
-                return PartialView((object)res.ToString());
+            int res = WordCountModel.WordCount(inputString);
+            return PartialView((object)res.ToString());
         }
 
         public ActionResult CurWordCount(string inputString, string CurWord)
         {
-            string[] textMass;
-            string text = inputString.Replace('\n', ' ');
-            textMass = text.Split(new char[] {' '});
-            int res = 0;
-            for (int i = 0; i < textMass.Length; ++i)
-            {
-                if (textMass[i] == CurWord)
-                {
-                    res = res + 1;
-                }
-            }
+            int res = WordCountModel.CurWordCount(inputString, CurWord);
             return PartialView((object)res.ToString());
         }
     }
