@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Word counter</h1>
+    <p class="lead">Count the words in the text or just find the number of keywords in the text</p>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Basic Word Counter</h2>
+            <p>Input text:</p>
+            <p>
+                @using (Ajax.BeginForm("WordCount", new AjaxOptions { UpdateTargetId = "resW"  }))
+                {
+                <textarea type="text" name="inputString" cols="40" rows="10"></textarea>
+                <input class="btn btn-default" type="submit" value="Count Word"/>
+                }
+            </p>    
+        <h3>Words: </h3>
+        <div id="resW"></div>
+    </div>
+
+    <div class="col-md-6">
+        <h2>Keyword Counter</h2>
+        <p>Input keyword:</p>
+        <p>
+            @using (Ajax.BeginForm("CurWordCount", new AjaxOptions { UpdateTargetId = "resC" }))
+            {
+                <input type="text" name="CurWord"/>
+                <p>Input text:</p>
+                <textarea type="text" name="inputString" cols="40" rows="10"></textarea>
+                <input class="btn btn-default" type="submit" value="Count Word" />
+            }
+            <h3>Keywords: </h3>
+            <div id="resC"></div>
+        </p>
+    </div>
+</div>
+@Scripts.Render("~/scripts/jquery-3.2.1.min.js")
+@Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
